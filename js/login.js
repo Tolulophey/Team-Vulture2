@@ -66,7 +66,7 @@ form.onsubmit = function (e) {
   e.preventDefault();
   checkInputs()
   const formControls = document.querySelectorAll(".success")
-  if(formControls.length ===2){
+  if(formControls.length !==2){
     return;
   }
   fetch("https://team-vulture2-backend.vercel.app/users/login", {

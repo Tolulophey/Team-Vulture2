@@ -92,7 +92,7 @@ form.onsubmit = function (e) {
   e.preventDefault();
   checkInputs()
   const formControls = document.querySelectorAll(".success")
-  if(formControls.length === 6){
+  if(formControls.length !== 6){
     return;
   }
   fetch("https://team-vulture2-backend.vercel.app/users/register", {

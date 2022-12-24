@@ -67,68 +67,69 @@ form.onsubmit = function (e) {
   checkInputs()
   const formControls = document.querySelectorAll(".success")
   if(formControls.length ===2){
-    fetch("https://team-vulture2-backend.vercel.app/users/login", {
-      method: "POST",
-      body: JSON.stringify({
-          email: document.getElementById("email").value,
-          password: document.getElementById("password").value
-  }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then(function (response) {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(function (jsonResponse) {
-        form.submit()
-        return jsonResponse["user"]
-    })
-    .then(function (user) {
-        if(rememberMe.checked){
-          localStorage.setItem("user", JSON.stringify(user))
-          localStorage.setItem("auth", true)
-          localStorage.setItem("remember", 1)
-        } else{
-          sessionStorage.setItem("user", JSON.stringify(user))
-          sessionStorage.setItem("auth", true)
-          localStorage.setItem("remember", 0)
-        }
-        swal({  
-          title: "Login!!!",  
-          text: " Login Successfully",  
-          icon: "success",  
-          button: "OK!",  
-        });
-        window.location.replace("./dashboard.html")
-    })
-    .catch(function (err) {
-        console.log(err.message)
-        if(err.status == 401){
-          swal({  
-            title: "Login Unsuccessful!!!",  
-            text: "password is incorrect",  
-            icon: "alert",  
-            button: "OK!",  
-          });
-        } else if(err.status == 404) {
-          swal({  
-            title: "Error!!!",  
-            text: "User not found, Please verify your details and try again",  
-            icon: "failure",  
-            button: "OK!",  
-          });
-        } else {
-          swal({  
-            title: "Error!!!",  
-            text: " Login failed, Please verify your details and try again",  
-            icon: "failure",  
-            button: "OK!",  
-          });
-        }
-    });
+    return;
   }
+  fetch("https://team-vulture2-backend.vercel.app/users/login", {
+    method: "POST",
+    body: JSON.stringify({
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(function (response) {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+  })
+  .then(function (jsonResponse) {
+      form.submit()
+      return jsonResponse["user"]
+  })
+  .then(function (user) {
+      if(rememberMe.checked){
+        localStorage.setItem("user", JSON.stringify(user))
+        localStorage.setItem("auth", true)
+        localStorage.setItem("remember", 1)
+      } else{
+        sessionStorage.setItem("user", JSON.stringify(user))
+        sessionStorage.setItem("auth", true)
+        localStorage.setItem("remember", 0)
+      }
+      swal({  
+        title: "Login!!!",  
+        text: " Login Successfully",  
+        icon: "success",  
+        button: "OK!"
+      });
+      window.location.replace("./dashboard.html")
+  })
+  .catch(function (err) {
+      console.log(err.message)
+      if(err.status == 401){
+        swal({  
+          title: "Login Unsuccessful!!!",  
+          text: "password is incorrect",  
+          icon: "alert",  
+          button: "OK!" 
+        });
+      } else if(err.status == 404) {
+        swal({  
+          title: "Error!!!",  
+          text: "User not found, Please verify your details and try again",  
+          icon: "failure",  
+          button: "OK!"  
+        });
+      } else {
+        swal({  
+          title: "Error!!!",  
+          text: " Login failed, Please verify your details and try again",  
+          icon: "failure",  
+          button: "OK!"  
+        });
+      }
+  });
 };

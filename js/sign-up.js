@@ -91,50 +91,50 @@ function isEmail(email) {
 form.onsubmit = function (e) {
   e.preventDefault();
   checkInputs()
-
   const formControls = document.querySelectorAll(".success")
   if(formControls.length === 6){
-    fetch("https://team-vulture2-backend.vercel.app/users/register", {
-      method: "POST",
-      body: JSON.stringify({
-          email: document.getElementById("email").value,
-          firstName: document.getElementById("firstName").value,
-          lastName: document.getElementById("lastName").value,
-          phoneNumber: document.getElementById("phoneNumber").value,
-          password: document.getElementById("password").value
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then(function (response) {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-      })
-      .then(function (jsonResponse) {
-          return jsonResponse["user"]
-      })
-      .then(function (user) {
-          form.submit()
-          console.log(user)
-          swal({  
-            title: "Registration!!!",  
-            text: " User Registration Successful\nYou will be directed now to the login page",  
-            icon: "success",  
-            button: "OK!",  
-          });
-          window.location.replace("./Login.html") 
-      })
-      .catch(function (err) {
-          console.log(err.message)
-          swal({  
-            title: "Registration Unsuccessful!!!",  
-            text: "please try again later",  
-            icon: "alert",  
-            button: "OK!",  
-          });
+    return;
+  }
+  fetch("https://team-vulture2-backend.vercel.app/users/register", {
+    method: "POST",
+    body: JSON.stringify({
+        email: document.getElementById("email").value,
+        firstName: document.getElementById("firstName").value,
+        lastName: document.getElementById("lastName").value,
+        phoneNumber: document.getElementById("phoneNumber").value,
+        password: document.getElementById("password").value
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then(function (response) {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+  })
+  .then(function (jsonResponse) {
+      return jsonResponse["user"]
+  })
+  .then(function (user) {
+      form.submit()
+      console.log(user)
+      swal({  
+        title: "Registration!!!",  
+        text: " User Registration Successful\nYou will be directed now to the login page",  
+        icon: "success",  
+        button: "OK!"
       });
-  };
+      window.location.replace("./Login.html") 
+  })
+  .catch(function (err) {
+      console.log(err.message)
+      swal({  
+        title: "Registration Unsuccessful!!!",  
+        text: "please try again later",  
+        icon: "alert",  
+        button: "OK!"
+      });
+  });
   }

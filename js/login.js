@@ -1,6 +1,14 @@
 const togglePassword = document.querySelector("#see_psw");
+const body = document.querySelector("body");
 const form = document.getElementById("form")
 const rememberMe = document.getElementById("RememberMe")
+
+
+// redirrction to dashboard if already logged in
+if (JSON.parse(localStorage.getItem("auth")) || JSON.parse(sessionStorage.getItem("auth"))){
+    window.location.replace("./dashboard.html")
+}
+
 
 togglePassword.addEventListener("click", function (e) {
     const password = document.querySelector("#password");
@@ -53,16 +61,6 @@ function isEmail(email) {
     email
   );
 }
-
-
-//To redirect staight to the dashboard if the user is already login
-window.onload = (e)=>{
-  e.preventDefault()
-  if (JSON.parse(localStorage.getItem("auth"))){
-      window.location.replace("./dashboard.html")
-  }
-}
-
 
 form.onsubmit = function (e) {
   e.preventDefault();

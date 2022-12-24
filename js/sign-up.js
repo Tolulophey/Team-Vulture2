@@ -12,6 +12,11 @@ const failure = document.querySelector('.failure_message');
 const form_message = document.querySelector('.form_message');
 const body = document.querySelector('body');
 
+// redirrction to dashboard if user exist and already logged in
+if (JSON.parse(localStorage.getItem("auth")) || JSON.parse(sessionStorage.getItem("auth"))){
+    window.location.replace("./dashboard.html")
+}
+
 //Form Validation
 function checkInputs() {
   // trim to remove the whitespaces
@@ -83,16 +88,6 @@ function isEmail(email) {
     email
   );
 }
-
-
-window.onload = (e)=>{
-  e.preventDefault()
-  if (JSON.parse(localStorage.getItem("auth"))){
-      window.location.replace("./dashboard.html")
-  }
-}
-
-
 form.onsubmit = function (e) {
   e.preventDefault();
   checkInputs()

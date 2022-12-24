@@ -1,6 +1,6 @@
 //the storage will have value if the user is logged in else the user shoould be redirected to login page
 if(!localStorage.getItem("remember")){
-    window.location.replace("./login.html")
+    window.location.replace("./Login.html")
 }
 
 
@@ -53,7 +53,7 @@ button.onclick = ()=>{
     localStorage.getItem("remember") == 1 ? localStorage.removeItem("user") : sessionStorage.removeItem("user")
     localStorage.getItem("remember") == 1 ? localStorage.removeItem("auth") : sessionStorage.removeItem("auth")
     localStorage.getItem("remember") == 1 ? localStorage.removeItem("remember") : sessionStorage.removeItem("remember")
-    window.location.replace("./login.html") 
+    window.location.replace("./Login.html") 
 }
 
 

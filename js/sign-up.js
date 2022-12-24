@@ -131,7 +131,7 @@ form.onsubmit = function (e) {
             button: "OK!",  
           });
           // window.location.href = "../Login page/login.html"
-          window.location.replace("./login.html") 
+          window.location.replace("./Login.html") 
       })
       .catch(function (err) {
           console.log(err.message)
